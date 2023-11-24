@@ -2,8 +2,10 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-
+visits = 0;
 app.get("/", (req,res) => {
+    ++visits;
+    console.log(visits)
     res.sendFile(path.join(__dirname,"/index.html"))
 })
 app.get("/image-4.png", (req,res) => {
