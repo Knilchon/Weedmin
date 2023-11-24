@@ -18,5 +18,5 @@ app.get("/image-4.png", (req,res) => {
   res.sendFile(imagePath);
 })
 
-app.listen(8000, () => console.log("Server life Works on Port 80!"));
-// app.listen(443, () => console.log("Server life Works on Port 443!"));
+app.listen(80, () => console.log("Server life Works on Port 80!"));
+app.listen(443, () => console.log("Server life Works on Port 443!"));
