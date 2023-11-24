@@ -1,5 +1,12 @@
 const express = require("express");
 const path = require("path");
+const fs = require('fs');
+const https = require('https');
+
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/knilchon.mywire.org/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/knilchon.mywire.org/fullchain.pem'),
+};
 
 const app = express();
 visits = 0;
@@ -18,5 +25,8 @@ app.get("/image-4.png", (req,res) => {
   res.sendFile(imagePath);
 })
 
-app.listen(80, () => console.log("Server life Works on Port 80!"));
-app.listen(443, () => console.log("Server life Works on Port 443!"));
+const server = https.createServer(options,app)
+
+server.listen(443, () => {
+  console.log(`Server running on https://knilchon.mywire.org`);
+})
