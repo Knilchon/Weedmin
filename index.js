@@ -13,10 +13,10 @@ let visits = 0;
 app.get("/", (req,res) => {
     ++visits;
     console.log(visits)
-    res.sendFile(path.join(__dirname,"/index.html"))
+    res.sendFile(path.resolve('index.html'))
 })
 app.get("/image-4.png", (req,res) => {
-  const imagePath = path.join(__dirname, 'image-4.png');
+  const imagePath = path.join(path.resolve('image-4.png') );
   
   // Set the content type to indicate that it's an image
   res.contentType('image/jpeg');

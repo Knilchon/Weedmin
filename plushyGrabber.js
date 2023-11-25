@@ -57,17 +57,11 @@ const msg = async(data) => {
             }
           });
     }else{
-        pusher.note('', title, "nothing yet", (error, response) => {
-            if (error) {
-              console.error('Error sending notification:', error);
-            } else {
-              console.log('Notification sent successfully:', response);
-            }
-          });
-    };
+	console.log("nothing yet");
+    }
 }
 
-const cronJob = new CronJob('* * * * *', () => {main().then(data => {
+const cronJob = new CronJob('0 */2 * * *', () => {main().then(data => {
     console.log("res:",data);
     msg(data)
 })})
