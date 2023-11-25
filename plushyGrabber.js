@@ -8,12 +8,13 @@ const pusher = new Pushbullet('o.3k5GkNqSALP8aj1DgVau0EvUFI6T8zxX');
 var browser = null
 
 const main = async () => {
+    try{
     console.log("launching")
     browser = await puppeteer.launch({
     args: ['--no-sandbox'],
-    headless: true
-});
-    console.log("init page")
+    headless: "new"
+    });
+    console.log("init page at ",new Date)
     const array = ['https://sanshee.com/en-de/products/rain-world-blue-lizard-glow-in-the-dark-plush','https://sanshee.com/en-de/products/rain-world-green-lizard-glow-in-the-dark-plush','https://sanshee.com/en-de/products/rain-world-pink-lizard-glow-in-the-dark-plush']
     const resArray = []
  
@@ -43,6 +44,10 @@ const main = async () => {
 
 
     return resArray
+    }catch
+    {
+        console.log("error")
+    }
 }
 
 const msg = async(data) => {
@@ -61,7 +66,7 @@ const msg = async(data) => {
     }
 }
 
-const cronJob = new CronJob('0 */2 * * *', () => {main().then(data => {
+const cronJob = new CronJob('0 */1 * * *', () => {main().then(data => {
     console.log("res:",data);
     msg(data)
 })})
