@@ -1,7 +1,7 @@
-const express = require("express");
-const path = require("path");
-const fs = require('fs');
-const https = require('https');
+import express from "express";
+import path from "path";
+import fs from "fs"
+import https from 'https'
 
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/knilchon.mywire.org/privkey.pem'),
@@ -9,7 +9,7 @@ const options = {
 };
 
 const app = express();
-visits = 0;
+let visits = 0;
 app.get("/", (req,res) => {
     ++visits;
     console.log(visits)
