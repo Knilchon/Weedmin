@@ -7,7 +7,9 @@ var browser = null
 
 const main = async () => {
     console.log("launching")
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({executablePath: '/usr/bin/chromium', 
+    args: ['--no-sandbox'],
+    headless: false});
     console.log("init page")
     const array = ['https://sanshee.com/en-de/products/rain-world-blue-lizard-glow-in-the-dark-plush','https://sanshee.com/en-de/products/rain-world-green-lizard-glow-in-the-dark-plush','https://sanshee.com/en-de/products/rain-world-pink-lizard-glow-in-the-dark-plush']
     const resArray = []
