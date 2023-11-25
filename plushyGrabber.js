@@ -1,5 +1,7 @@
 import puppeteer from "puppeteer";
 import Pushbullet from 'pushbullet';
+import {CronJob} from 'cron'
+
 const pusher = new Pushbullet('o.3k5GkNqSALP8aj1DgVau0EvUFI6T8zxX');
 
 
@@ -8,7 +10,6 @@ var browser = null
 const main = async () => {
     console.log("launching")
     browser = await puppeteer.launch({
-    executablePath: '/usr/bin/chromium', 
     args: ['--no-sandbox'],
     headless: true
 });
@@ -35,6 +36,8 @@ const main = async () => {
     await page3.goto(array[2])
     console.log("getting button")
     const button3 = await page3.$('[class="product-form__add-button button button--disabled"]')
+
+    browser.close()
 
     resArray.push(button3 ? false : true)
 
@@ -64,8 +67,11 @@ const msg = async(data) => {
     };
 }
 
-
-main().then(data => {
+const cronJob = new CronJob('* * * * *', () => {main().then(data => {
     console.log("res:",data);
-    msg(data).then(setInterval(() => process.exit(1),10000))
-})
+    msg(data)
+})})
+
+
+// Start the cron job
+cronJob.start();
