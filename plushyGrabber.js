@@ -19,21 +19,21 @@ const main = async () => {
  
     const page = await browser.newPage();
     console.log("loading page 0")
-    await page.goto(array[0])
+    await page.goto(array[0],{timeout: 60000})
     console.log("getting button")
     const button = await page.$('[class="product-form__add-button button button--disabled"]')
     resArray.push(button ? false : true)
 
     const page2 = await browser.newPage();
     console.log("loading page 1")
-    await page2.goto(array[1])
+    await page2.goto(array[1],{timeout: 60000})
     console.log("getting button")
     const button2 = await page2.$('[class="product-form__add-button button button--disabled"]')
     resArray.push(button2 ? false : true)
 
     const page3 = await browser.newPage();
     console.log("loading page 2")
-    await page3.goto(array[2])
+    await page3.goto(array[2],{timeout: 60000})
     console.log("getting button")
     const button3 = await page3.$('[class="product-form__add-button button button--disabled"]')
 
